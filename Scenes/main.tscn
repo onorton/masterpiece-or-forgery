@@ -83,7 +83,7 @@ texture = ExtResource( 7 )
 [node name="Clue" parent="Paintings/Painting/Clues" index="0"]
 position = Vector2( 106, 84 )
 scale = Vector2( 20, 10 )
-_clueDescription = "There's his signature"
+_clueDescription = "There's a signature \"NVS\""
 
 [node name="Clue2" type="Node2D" parent="Paintings/Painting/Clues" index="1"]
 position = Vector2( 109, -70 )
@@ -292,7 +292,7 @@ View = 1
 [node name="Painting5" parent="Paintings" instance=ExtResource( 2 )]
 visible = false
 Title = "Composition with Purple, Green and Yellow"
-Artist = "Pete Mondrian"
+Artist = "Pete Mandarin"
 Year = 1930
 _possibleHints = PoolStringArray( "" )
 _front = ExtResource( 20 )
@@ -330,7 +330,7 @@ _clueDescription = "The lines are perfect, like someone used masking tape."
 [node name="Clue6" parent="Paintings/Painting5/Clues" index="5" instance=ExtResource( 27 )]
 position = Vector2( -79, -91.951 )
 scale = Vector2( 10, 10 )
-_clueDescription = "A signature"
+_clueDescription = "Signed \"PM\""
 View = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
