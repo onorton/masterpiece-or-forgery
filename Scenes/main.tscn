@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scripts/UI.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Painting.tscn" type="PackedScene" id=2]
@@ -25,6 +25,9 @@
 [ext_resource path="res://Sprites/Child_Of_Woman_Front.png" type="Texture" id=23]
 [ext_resource path="res://Sprites/sound_on.png" type="Texture" id=24]
 [ext_resource path="res://Sprites/sound_off.png" type="Texture" id=25]
+[ext_resource path="res://rectangle.tres" type="Shape2D" id=26]
+[ext_resource path="res://Scenes/Clue.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Scripts/Painting.cs" type="Script" id=28]
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
@@ -56,105 +59,279 @@ autoplay = true
 attenuation = 1.52588e-05
 
 [node name="MainTimer" type="Timer" parent="."]
-wait_time = 60.0
+wait_time = 120.0
 one_shot = true
 
 [node name="HintTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 20.0
 
 [node name="Paintings" type="Node2D" parent="."]
-position = Vector2( 400, 300 )
+position = Vector2( 400, 274.951 )
 
 [node name="Painting" parent="Paintings" instance=ExtResource( 2 )]
+visible = false
 Title = "A Starry Evening"
 Artist = "Nincent Von Stoph"
-_possibleHints = PoolStringArray( "Here\'s a hint" )
+Year = 1889
+_possibleHints = PoolStringArray(  )
 _front = ExtResource( 7 )
 _back = ExtResource( 6 )
 
 [node name="Sprite" parent="Paintings/Painting" index="0"]
-visible = false
 texture = ExtResource( 7 )
 
 [node name="Clue" parent="Paintings/Painting/Clues" index="0"]
-position = Vector2( -112, -56 )
-scale = Vector2( 10, 10 )
+position = Vector2( 106, 84 )
+scale = Vector2( 20, 10 )
+_clueDescription = "There's his signature"
 
 [node name="Clue2" type="Node2D" parent="Paintings/Painting/Clues" index="1"]
 position = Vector2( 109, -70 )
 scale = Vector2( -23.1333, 24.0346 )
 script = ExtResource( 15 )
-_clueDescription = "This is a clue asdasd"
+_clueDescription = "The quality of the brushwork is exquisite"
 
 [node name="Area2D" type="Area2D" parent="Paintings/Painting/Clues/Clue2"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Paintings/Painting/Clues/Clue2/Area2D"]
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="Paintings/Painting/Clues/Clue2"]
-
-[node name="Painting2" parent="Paintings" instance=ExtResource( 2 )]
-visible = false
+[node name="Painting2" type="Node2D" parent="Paintings"]
+script = ExtResource( 28 )
 Title = "Grumpy Eliza"
 Artist = "Giovanni Di Vicki"
+Year = 1506
 Real = false
-_possibleHints = PoolStringArray( "" )
+_possibleHints = PoolStringArray( "Acrylic paint was invented in the 20th Century" )
 _front = ExtResource( 11 )
 _back = ExtResource( 12 )
 
-[node name="Sprite" parent="Paintings/Painting2" index="0"]
-visible = false
+[node name="Sprite" type="Sprite" parent="Paintings/Painting2"]
 texture = ExtResource( 11 )
+
+[node name="Clues" type="Node2D" parent="Paintings/Painting2"]
+
+[node name="Clue" parent="Paintings/Painting2/Clues" instance=ExtResource( 27 )]
+position = Vector2( -1, -57.951 )
+scale = Vector2( 40, 40 )
+_clueDescription = "This seems to be acrylic paint"
+
+[node name="Area2D" type="Area2D" parent="Paintings/Painting2/Clues/Clue"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paintings/Painting2/Clues/Clue/Area2D"]
+shape = ExtResource( 26 )
+
+[node name="Clue2" parent="Paintings/Painting2/Clues" instance=ExtResource( 27 )]
+position = Vector2( 68, 57.049 )
+scale = Vector2( 20, 50 )
+_clueDescription = "Grain in the wood is tight. Frame looks to be of the time."
+
+[node name="Area2D2" type="Area2D" parent="Paintings/Painting2/Clues/Clue2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paintings/Painting2/Clues/Clue2/Area2D2"]
+shape = ExtResource( 26 )
+
+[node name="Clue3" parent="Paintings/Painting2/Clues" instance=ExtResource( 27 )]
+position = Vector2( 0, -0.950989 )
+scale = Vector2( 60, 98 )
+_clueDescription = "Looks like it's been cut out"
+View = 1
+
+[node name="Area2D2" type="Area2D" parent="Paintings/Painting2/Clues/Clue3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paintings/Painting2/Clues/Clue3/Area2D2"]
+shape = ExtResource( 26 )
 
 [node name="Painting3" parent="Paintings" instance=ExtResource( 2 )]
 visible = false
 Title = "Lady With A Stone Necklace"
 Artist = "Johnny Vernor"
+Year = 1665
 Real = false
-_possibleHints = PoolStringArray( "" )
+_possibleHints = PoolStringArray( "Older wood typically grows slower" )
 _front = ExtResource( 16 )
 _back = ExtResource( 17 )
 
 [node name="Sprite" parent="Paintings/Painting3" index="0"]
-visible = false
 texture = ExtResource( 16 )
 
-[node name="Painting4" parent="Paintings" instance=ExtResource( 2 )]
+[node name="Clue" parent="Paintings/Painting3/Clues" index="0"]
+position = Vector2( -27, -0.950989 )
+scale = Vector2( 20, 20 )
+_clueDescription = "Paint is oddly thick here"
+
+[node name="Clue2" parent="Paintings/Painting3/Clues" index="1" instance=ExtResource( 27 )]
+position = Vector2( 1, -0.950989 )
+scale = Vector2( 72.727, 100 )
+_clueDescription = "Canvas is quite light. Couldn't be more than a hundred years old"
+View = 1
+
+[node name="Clue3" parent="Paintings/Painting3/Clues" index="2" instance=ExtResource( 27 )]
+position = Vector2( 0, -106.951 )
+scale = Vector2( 85, 5 )
+_clueDescription = "There's a lot of space in the grains of wood"
+
+[node name="Clue4" parent="Paintings/Painting3/Clues" index="3" instance=ExtResource( 27 )]
+position = Vector2( 0, 107.049 )
+scale = Vector2( 85, 5 )
+_clueDescription = "There's a lot of space in the grains of wood"
+
+[node name="Clue5" parent="Paintings/Painting3/Clues" index="4" instance=ExtResource( 27 )]
+position = Vector2( -80, -1.95099 )
+scale = Vector2( 5, 110 )
+_clueDescription = "There's a lot of space in the grains of wood"
+
+[node name="Clue6" parent="Paintings/Painting3/Clues" index="5" instance=ExtResource( 27 )]
+position = Vector2( 80, -1.95099 )
+scale = Vector2( 5, 110 )
+_clueDescription = "There's a lot of space in the grains of wood"
+
+[node name="Painting4" type="Node2D" parent="Paintings"]
 visible = false
+script = ExtResource( 28 )
 Title = "Murrica Dreadful"
 Artist = "Grant Forest"
-_possibleHints = PoolStringArray( "" )
+Year = 1930
+_possibleHints = PoolStringArray( "Grant Forest\'s middle name is DeVolson " )
 _front = ExtResource( 18 )
 _back = ExtResource( 19 )
 
-[node name="Sprite" parent="Paintings/Painting4" index="0"]
-visible = false
+[node name="Sprite" type="Sprite" parent="Paintings/Painting4"]
 texture = ExtResource( 18 )
+
+[node name="Clues" type="Node2D" parent="Paintings/Painting4"]
+
+[node name="Clue" parent="Paintings/Painting4/Clues" instance=ExtResource( 27 )]
+position = Vector2( -42, -29.951 )
+scale = Vector2( 30, 30 )
+_clueDescription = "Definitely appears to be oil paint"
+
+[node name="Clue2" parent="Paintings/Painting4/Clues" instance=ExtResource( 27 )]
+position = Vector2( 36, -55.951 )
+scale = Vector2( 25, 32 )
+_clueDescription = "Definitely appears to be oil paint"
+
+[node name="Clue8" parent="Paintings/Painting4/Clues" instance=ExtResource( 27 )]
+position = Vector2( -85, -0.950989 )
+scale = Vector2( 5, 108 )
+_clueDescription = "Grain of the wood of the frame is quite tight"
+
+[node name="Clue9" parent="Paintings/Painting4/Clues" instance=ExtResource( 27 )]
+position = Vector2( 85, -0.950989 )
+scale = Vector2( 5, 108 )
+_clueDescription = "Grain of the wood of the frame is quite tight"
+
+[node name="Clue13" parent="Paintings/Painting4/Clues" instance=ExtResource( 27 )]
+position = Vector2( 2, 1.04901 )
+scale = Vector2( 75, 92 )
+_clueDescription = "Canvas is still light"
+View = 1
+
+[node name="Clue10" parent="Paintings/Painting4/Clues" instance=ExtResource( 27 )]
+position = Vector2( 0, -103.951 )
+scale = Vector2( 85, 5 )
+_clueDescription = "Grain of the wood of the frame is quite tight"
+
+[node name="Clue11" parent="Paintings/Painting4/Clues" instance=ExtResource( 27 )]
+position = Vector2( 0, 105.049 )
+scale = Vector2( 85, 5 )
+_clueDescription = "Grain of the wood of the frame is quite tight"
+
+[node name="Clue12" parent="Paintings/Painting4/Clues" instance=ExtResource( 27 )]
+position = Vector2( 67, 93.049 )
+scale = Vector2( 12, 10 )
+_clueDescription = "The signature says \"GDF\""
 
 [node name="Painting6" parent="Paintings" instance=ExtResource( 2 )]
 visible = false
 Title = "Child of Woman"
 Artist = "Renny Margaret"
+Year = 1964
 Real = false
-_possibleHints = PoolStringArray( "" )
+_possibleHints = PoolStringArray( "This is a self-portrait of the artist in his 60s" )
 _front = ExtResource( 23 )
 _back = ExtResource( 22 )
 
 [node name="Sprite" parent="Paintings/Painting6" index="0"]
-visible = false
 texture = ExtResource( 23 )
+
+[node name="Clue2" parent="Paintings/Painting6/Clues" index="0" instance=ExtResource( 27 )]
+position = Vector2( 46, 40.049 )
+scale = Vector2( 10, 10 )
+_clueDescription = "Elbow is bent backwards"
+
+[node name="Clue" parent="Paintings/Painting6/Clues" index="1"]
+position = Vector2( 0, -62.951 )
+scale = Vector2( 20, 20 )
+_clueDescription = "The man behind the apple appears to be quite young"
+
+[node name="Clue3" parent="Paintings/Painting6/Clues" index="2" instance=ExtResource( 27 )]
+position = Vector2( 1, -104.951 )
+scale = Vector2( 80, 10 )
+_clueDescription = "Screws between the frame and canvas are worn"
+View = 1
+
+[node name="Clue4" parent="Paintings/Painting6/Clues" index="3" instance=ExtResource( 27 )]
+position = Vector2( 1, 108.049 )
+scale = Vector2( 80, 10 )
+_clueDescription = "Screws between the frame and canvas are worn"
+View = 1
+
+[node name="Clue5" parent="Paintings/Painting6/Clues" index="4" instance=ExtResource( 27 )]
+position = Vector2( -70, 0.0490112 )
+scale = Vector2( 10, 100 )
+_clueDescription = "Screws between the frame and canvas are worn"
+View = 1
+
+[node name="Clue6" parent="Paintings/Painting6/Clues" index="5" instance=ExtResource( 27 )]
+position = Vector2( 71, 0.0490112 )
+scale = Vector2( 10, 100 )
+_clueDescription = "Screws between the frame and canvas are worn"
+View = 1
 
 [node name="Painting5" parent="Paintings" instance=ExtResource( 2 )]
 visible = false
 Title = "Composition with Purple, Green and Yellow"
 Artist = "Pete Mondrian"
+Year = 1930
 _possibleHints = PoolStringArray( "" )
 _front = ExtResource( 20 )
 _back = ExtResource( 21 )
+_currentView = 1
 
 [node name="Sprite" parent="Paintings/Painting5" index="0"]
-visible = false
-texture = ExtResource( 20 )
+texture = ExtResource( 21 )
+
+[node name="Clue" parent="Paintings/Painting5/Clues" index="0"]
+position = Vector2( 8, -36.951 )
+scale = Vector2( 8, 70 )
+_clueDescription = "The lines are perfect, like someone used masking tape."
+
+[node name="Clue2" parent="Paintings/Painting5/Clues" index="1" instance=ExtResource( 27 )]
+position = Vector2( 67, 26.049 )
+scale = Vector2( 8, 80 )
+_clueDescription = "The lines are perfect, like someone used masking tape."
+
+[node name="Clue3" parent="Paintings/Painting5/Clues" index="2" instance=ExtResource( 27 )]
+position = Vector2( 0, 28.049 )
+scale = Vector2( 95, 8 )
+_clueDescription = "The lines are perfect, like someone used masking tape."
+
+[node name="Clue4" parent="Paintings/Painting5/Clues" index="3" instance=ExtResource( 27 )]
+position = Vector2( 0, 89.049 )
+scale = Vector2( 95, 8 )
+_clueDescription = "The lines are perfect, like someone used masking tape."
+
+[node name="Clue5" parent="Paintings/Painting5/Clues" index="4" instance=ExtResource( 27 )]
+position = Vector2( 48, -50.951 )
+scale = Vector2( 50, 8 )
+_clueDescription = "The lines are perfect, like someone used masking tape."
+
+[node name="Clue6" parent="Paintings/Painting5/Clues" index="5" instance=ExtResource( 27 )]
+position = Vector2( -79, -91.951 )
+scale = Vector2( 10, 10 )
+_clueDescription = "A signature"
+View = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -165,10 +342,11 @@ mouse_filter = 2
 script = ExtResource( 1 )
 
 [node name="CurrentPainting" type="TextureRect" parent="UI/UI"]
+visible = false
 margin_left = 265.0
-margin_top = 192.0
+margin_top = 153.0
 margin_right = 535.0
-margin_bottom = 408.0
+margin_bottom = 398.0
 mouse_filter = 2
 texture = ExtResource( 7 )
 stretch_mode = 4
@@ -209,7 +387,7 @@ custom_constants/margin_left = 10
 [node name="Bottom Panel" type="VBoxContainer" parent="UI/UI/MarginContainer"]
 margin_left = 10.0
 margin_right = 790.0
-margin_bottom = 160.0
+margin_bottom = 184.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -251,7 +429,7 @@ text = "Reject"
 [node name="Information Panel" type="PanelContainer" parent="UI/UI/MarginContainer/Bottom Panel"]
 margin_top = 66.0
 margin_right = 300.0
-margin_bottom = 160.0
+margin_bottom = 184.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 0
 
@@ -259,7 +437,7 @@ size_flags_horizontal = 0
 margin_left = 25.0
 margin_top = 25.0
 margin_right = 275.0
-margin_bottom = 69.0
+margin_bottom = 93.0
 
 [node name="Title" type="HBoxContainer" parent="UI/UI/MarginContainer/Bottom Panel/Information Panel/VBoxContainer"]
 margin_right = 250.0
@@ -298,6 +476,29 @@ text = "Artist: "
 scroll_active = false
 
 [node name="Value" type="RichTextLabel" parent="UI/UI/MarginContainer/Bottom Panel/Information Panel/VBoxContainer/Artist"]
+margin_left = 54.0
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+meta_underlined = false
+text = "Piece Title"
+scroll_active = false
+
+[node name="Year" type="HBoxContainer" parent="UI/UI/MarginContainer/Bottom Panel/Information Panel/VBoxContainer"]
+margin_top = 48.0
+margin_right = 250.0
+margin_bottom = 68.0
+
+[node name="Key" type="RichTextLabel" parent="UI/UI/MarginContainer/Bottom Panel/Information Panel/VBoxContainer/Year"]
+margin_right = 50.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 50, 20 )
+meta_underlined = false
+text = "Year: "
+scroll_active = false
+
+[node name="Value" type="RichTextLabel" parent="UI/UI/MarginContainer/Bottom Panel/Information Panel/VBoxContainer/Year"]
 margin_left = 54.0
 margin_right = 250.0
 margin_bottom = 20.0
@@ -456,6 +657,8 @@ margin_bottom = 40.0
 [connection signal="timeout" from="HintTimer" to="." method="OnHintTimerExpired"]
 [connection signal="mouse_entered" from="Paintings/Painting/Clues/Clue2/Area2D" to="Paintings/Painting/Clues/Clue2" method="OnMouseEnter"]
 [connection signal="mouse_exited" from="Paintings/Painting/Clues/Clue2/Area2D" to="Paintings/Painting/Clues/Clue2" method="OnMouseExit"]
+[connection signal="mouse_entered" from="Paintings/Painting2/Clues/Clue/Area2D" to="Paintings/Painting2/Clues/Clue" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="Paintings/Painting2/Clues/Clue/Area2D" to="Paintings/Painting2/Clues/Clue" method="OnMouseExit"]
 [connection signal="pressed" from="UI/UI/CurrentPainting/View Buttons/Front" to="." method="OnViewSelected" binds= [ "Front" ]]
 [connection signal="pressed" from="UI/UI/CurrentPainting/View Buttons/Front" to="SoundManager" method="OnPlaySoundEffect" binds= [ "turn_around" ]]
 [connection signal="pressed" from="UI/UI/CurrentPainting/View Buttons/Back" to="." method="OnViewSelected" binds= [ "Back" ]]
@@ -467,8 +670,6 @@ margin_bottom = 40.0
 [connection signal="toggled" from="UI/UI/MarginContainer2/HBoxContainer/CheckButton" to="SoundManager" method="OnMuteToggle"]
 
 [editable path="Paintings/Painting"]
-[editable path="Paintings/Painting2"]
 [editable path="Paintings/Painting3"]
-[editable path="Paintings/Painting4"]
 [editable path="Paintings/Painting6"]
 [editable path="Paintings/Painting5"]

@@ -11,6 +11,7 @@ public class UI : Control
     public override void _Ready()
     {
         GetNode<Control>("Score").Visible = false;
+        GetNode<Control>("CurrentPainting").Visible = true;
         Visible = true;
 
     }
@@ -25,6 +26,7 @@ public class UI : Control
     {
         GetNode<RichTextLabel>("MarginContainer/Bottom Panel/Information Panel/VBoxContainer/Title/Value").Text = painting.Title;
         GetNode<RichTextLabel>("MarginContainer/Bottom Panel/Information Panel/VBoxContainer/Artist/Value").Text = painting.Artist;
+        GetNode<RichTextLabel>("MarginContainer/Bottom Panel/Information Panel/VBoxContainer/Year/Value").Text = painting.Year.ToString();
     }
 
     public void SetScore(int realPurchases, int counterfeitPurchases, int totalRealPieces)
@@ -60,7 +62,7 @@ public class UI : Control
         else
         {
             GetNode<Control>("HintContainer").Visible = true;
-            GetNode<RichTextLabel>("HintContainer/Hint").Text = hint;
+            GetNode<RichTextLabel>("HintContainer/Hint").Text = $"Hint: {hint}";
         }
     }
 
@@ -68,6 +70,19 @@ public class UI : Control
     {
         GetNode<TextureRect>("CurrentPainting").Texture = texture;
 
+    }
+
+    public void DisableButtons()
+    {
+        foreach (var button in GetNode<Control>("CurrentPainting/View Buttons").GetChildren())
+        {
+            (button as Button).Disabled = true;
+        }
+
+        foreach (var button in GetNode<Control>("MarginContainer/Bottom Panel/HBoxContainer").GetChildren())
+        {
+            (button as Button).Disabled = true;
+        }
     }
 
 

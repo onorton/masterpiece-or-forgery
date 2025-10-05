@@ -16,6 +16,10 @@ public class Painting : Node2D
     public string Artist;
 
     [Export]
+
+    public int Year;
+
+    [Export]
     public bool Real = true;
 
     [Export]
@@ -38,7 +42,7 @@ public class Painting : Node2D
     {
         _currentView = View.Front;
         SetView(_currentView);
-        GetNode<Sprite>("Sprite").Visible = false;
+        // GetNode<Sprite>("Sprite").Visible = false;
     }
 
     public override void _Process(float delta)

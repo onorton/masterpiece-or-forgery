@@ -12,7 +12,5 @@ _clueDescription = "This is a clue"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
-
 [connection signal="mouse_entered" from="Area2D" to="." method="OnMouseEnter"]
 [connection signal="mouse_exited" from="Area2D" to="." method="OnMouseExit"]

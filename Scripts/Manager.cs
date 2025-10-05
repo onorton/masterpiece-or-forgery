@@ -23,7 +23,6 @@ public class Manager : Node2D
         GetNode<UI>("UI/UI").SetHint("");
         _purchasedPieces = new List<Painting>();
         _pendingPieces = GetNode("Paintings").GetChildren().OfType<Painting>().ToList();
-        GetNode<Node2D>("Paintings").Position = GetViewport().GetVisibleRect().Size / 2;
         foreach (var pendingPainting in _pendingPieces)
         {
             pendingPainting.Visible = false;
@@ -94,9 +93,11 @@ public class Manager : Node2D
     public async Task OnFinished()
     {
         var timeLeft = GetNode<Timer>("MainTimer").TimeLeft;
+        GetNode<Timer>("MainTimer").Paused = true;
         GD.Print($"Time left: {timeLeft}");
         var realPurchases = _purchasedPieces.Where(p => p.Real).Count();
         var counterfeitPurchases = _purchasedPieces.Where(p => !p.Real).Count();
+        GetNode<UI>("UI/UI").DisableButtons();
 
         var timer = GetTree().CreateTimer(0.0f);
         await ToSignal(timer, "timeout");
