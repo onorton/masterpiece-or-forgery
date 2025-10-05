@@ -1,0 +1,57 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Resource",
+"class": "ArtPiece",
+"language": "GDScript",
+"path": "res://Scripts/art_piece.gd"
+}, {
+"base": "Resource",
+"class": "ClueData",
+"language": "GDScript",
+"path": "res://Scripts/clue_data.gd"
+} ]
+_global_script_class_icons={
+"ArtPiece": "",
+"ClueData": ""
+}
+
+[application]
+
+config/name="Masterpiece or Forgery"
+run/main_scene="res://Scenes/main.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=800
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray(  )
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[mono]
+
+project/assembly_name="LudumDare58"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=7 format=2]
+
+[ext_resource path="res://Sprites/panel.png" type="Texture" id=1]
+[ext_resource path="res://button.tres" type="StyleBox" id=2]
+[ext_resource path="res://button_hover.tres" type="StyleBox" id=3]
+[ext_resource path="res://button_pressed.tres" type="StyleBox" id=4]
+[ext_resource path="res://button_disabled.tres" type="StyleBox" id=5]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 300, 300 )
+margin_left = 25.0
+margin_right = 25.0
+margin_top = 25.0
+margin_bottom = 25.0
+
+[resource]
+Button/colors/font_color = Color( 0, 0, 0, 1 )
+Button/colors/font_color_focus = Color( 0, 0, 0, 1 )
+Button/colors/font_color_hover = Color( 0.133333, 0.133333, 0.133333, 1 )
+Button/colors/font_color_hover_pressed = Color( 0, 0, 0, 1 )
+Button/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+Button/styles/disabled = ExtResource( 5 )
+Button/styles/hover = ExtResource( 3 )
+Button/styles/normal = ExtResource( 2 )
+Button/styles/pressed = ExtResource( 4 )
+PanelContainer/styles/panel = SubResource( 1 )
+RichTextLabel/colors/default_color = Color( 0, 0, 0, 1 )
